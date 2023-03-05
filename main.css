@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+#board {
+    height: 100vh;
+    position: relative;
+    background-color: black;
+ 
+}
+
+ #player {
+    background-color: palevioletred;
+    width: 10vw;
+    height: 15vh;
+    position: absolute;
+    bottom: 10vh; 
+    
+
+}
+ 
+.snowball {
+    height: 20vh;
+    width: 20vw;
+    background-color: red;
+    position: absolute;
+}
+
+
+/*
+.obstacle {
+    background-color: antiquewhite;
+    position: absolute;
+} */
+
