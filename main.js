@@ -72,12 +72,14 @@ const snowballsArr = [];
 setInterval(function(){
    const mySnowball = new Snowball();
    snowballsArr.push(mySnowball);
-}, 3000);
+}, 2000);
 
 
  setInterval(function(){
-  // mySnowball.moveDown();
- }, 1000);
+    snowballsArr.forEach((snow) =>{
+      snow.moveDown();
+    })
+ }, 16);
   
 
  
