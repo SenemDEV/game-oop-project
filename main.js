@@ -40,12 +40,12 @@ class Mygame {
         this.player.height + this.player.positionY > snow.positionY
       ) 
       {
-        //window.location.href = "./game-over-page.html"
+        window.location.href = "./game-over-page.html"
       }
   }
 
   removeFromGame(snow) {
-    if (snow.positionY < 0) {
+    if (snow.positionY < -16) {
         snow.snowballElm.remove();
         this.snowballsArr.shift();
       }

@@ -25,4 +25,25 @@ body {
 }
 
 
+h1 {
+    background-color: red;
+    border-radius: 10%;
+    color: cornsilk;
+    padding: 15vh;
+}
 
+
+#game-over-body{
+    background-color: cornsilk;
+}
+#tryAgain-button {
+    position: absolute;
+    background-color: green;
+    padding: 3vh;
+    margin-left: 20vw;
+    border-radius: 30%;
+}
+
+a {
+    color: cornsilk;
+}
