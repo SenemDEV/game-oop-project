@@ -11,7 +11,7 @@ class Mygame {
     setInterval( () => {
       const mySnowball = new Snowball();
       this.snowballsArr.push(mySnowball);
-    }, 2000);
+    }, 500);
 
     setInterval( () => {
       this.snowballsArr.forEach((snow) => {
@@ -40,7 +40,7 @@ class Mygame {
         this.player.height + this.player.positionY > snow.positionY
       ) 
       {
-        window.location.href = "./game-over-page.html"
+        //window.location.href = "./game-over-page.html"
       }
   }
 
@@ -64,12 +64,12 @@ class Player {
     this.playerElm.style.width = this.width + "vw";
   }
   moveLeft() {
-    this.positionX--;
+    this.positionX -= 2;
     this.playerElm.style.left = this.positionX + "vw";
     //console.log(`current position...`, this.positionX )
   }
   moveRight() {
-    this.positionX++;
+    this.positionX += 2;
     this.playerElm.style.left = this.positionX + "vw";
     //console.log(`current position...`, this.positionX)
   }
@@ -77,13 +77,13 @@ class Player {
 
 class Snowball {
   constructor() {
-    this.height = 10;
-    this.width = 20;
-    this.positionX = 40;
+    this.height = Math.floor((Math.random() * 30) + 1);//was 10;
+    this.width =   Math.floor((Math.random() * Math.random()) + 1);   //was 20;
+    this.positionX = Math.floor((Math.random() * 70) + 1);
     this.positionY = 100;
     this.snowballElm = null;
     this.createDomElmSnowball();
-
+    
     //  this.myNewImgElm =null;
   }
 
@@ -123,3 +123,7 @@ const game = new Mygame();
 game.start();
 
 
+/////////////////////////////////
+
+// this.obstaclePositnion = [0, 70, 140, 210, 280, 350, 420];
+//         this.positionY = this.obstaclePositnion[Math.floor(Math.random() * this.obstaclePositnion.length)];
