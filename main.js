@@ -5,7 +5,11 @@ class Player {
     constructor() {
         this.positionX = 0;
         this.positionY = 0;
+        this.height = 30;
+        this.width = 10;
         this.playerElm = document.getElementById("player")
+        this.playerElm.style.height = this.height + "vh";
+        this.playerElm.style.width = this.width + "vw";
     }
     moveLeft() {
        this.positionX--;
@@ -28,6 +32,7 @@ class Snowball {
         this.snowballElm = null;
         this.createDomElmSnowball();
         
+
     //  this.myNewImgElm =null;
         
     }
@@ -39,8 +44,11 @@ class Snowball {
      this.snowballElm.className = "snowball";
      this.snowballElm.style.left = this.positionX + "vw";
      const boardElm = document.getElementById("board");
-     boardElm.appendChild(this.snowballElm);     
-
+     boardElm.appendChild(this.snowballElm);
+     this.height = 10;
+     this.width = 20;
+     this.snowballElm.style.height = this.height + "vh";
+     this.snowballElm.style.width = this.width + "vw";
 
     //     //Create a DOM element with img
     //     this.myNewImgElm = document.createElement('img');
@@ -78,7 +86,15 @@ setInterval(function(){
  setInterval(function(){
     snowballsArr.forEach((snow) =>{
       snow.moveDown();
-    })
+      if (
+        myPlayer.positionX < snow.positionX + snow.width &&
+        myPlayer.positionX + myPlayer.width > snow.positionX &&
+        myPlayer.positionY <snow.positionX + snow.height &&
+        myPlayer.height + myPlayer.positionY > snow.positionY
+      ) {
+        console.log(`there was a colision`)
+      };
+    });
  }, 16);
   
 
