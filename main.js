@@ -70,10 +70,6 @@ class Snowball {
 
 }
 
-
-
-
-
 const myPlayer = new Player();
 const snowballsArr = [];
     
@@ -92,7 +88,9 @@ setInterval(function(){
         myPlayer.positionY <snow.positionX + snow.height &&
         myPlayer.height + myPlayer.positionY > snow.positionY
       ) {
-        console.log(`there was a colision`)
+    
+       //window.location.href = "./game-over-page.html"
+       
       };
     });
  }, 16);
