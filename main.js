@@ -1,3 +1,4 @@
+
 class Mygame {
   constructor() {
     this.player = null;
@@ -30,10 +31,10 @@ class Mygame {
     setInterval(() => {
       this.fireballsArr.forEach((fireballInstance) => {
         fireballInstance.moveUp();
-        //this.detectCollision(fireballInstance);
         this.removeFromGame(fireballInstance);
       });
     }, 16);
+
   }
 
   attachEventListeners() {
@@ -46,10 +47,8 @@ class Mygame {
     });
   }
 
-  //detect colision
-
   removeFromGame(fireballInstance) {
-    if (fireballInstance.positionY < -16) {
+    if (fireballInstance.positionY > 100) {
       fireballInstance.fireballElm.remove();
       this.fireballsArr.shift();
     }
@@ -62,7 +61,7 @@ class Mygame {
       this.player.positionY < snow.positionX + snow.height &&
       this.player.height + this.player.positionY > snow.positionY
     ) {
-      window.location.href = "./game-over-page.html"
+      //window.location.href = "./game-over-page.html"
     }
   }
 
@@ -102,7 +101,7 @@ class Player {
 
 class Snowball {
   constructor() {
-    this.height = 10; //Math.floor(Math.random() * 30 + 1); //was 10;
+    this.height = Math.floor(Math.random() * 30 + 1); //was 10;
     this.width = Math.floor(Math.random() * Math.random() + 1); //was 20;
     this.positionX = Math.floor(Math.random() * 70 + 1);
     this.positionY = 100;
@@ -143,8 +142,8 @@ class Snowball {
 
 class Fireball {
   constructor() {
-    this.height = 10;
-    this.width = 10;
+    this.height = 27;
+    this.width = 7;
     this.positionX = 0; //Math.floor(Math.random() * 100 + 1);
     this.positionY = Math.floor(Math.random() * 100 + 1);
     this.fireballElm = null;
@@ -166,7 +165,6 @@ class Fireball {
 
   moveUp() {
     this.positionY++;
-    //console.log(this.positionX);
     this.fireballElm.style.border = "3px solid green";
     this.fireballElm.style.bottom = this.positionY + "vh";
   }
@@ -174,3 +172,11 @@ class Fireball {
 
 const game = new Mygame();
 game.start();
+
+
+
+
+
+
+
+
