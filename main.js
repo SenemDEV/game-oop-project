@@ -1,15 +1,16 @@
 
 class Mygame {
-  constructor() {
+  constructor(timer) { //timer deleet it if not working
     this.player = null;
     this.snowballsArr = [];
     this.fireballsArr = [];
+    this.timer = timer;//deleete if not working
   }
 
   start() {
     this.player = new Player();
     this.attachEventListeners();
-
+    
     setInterval(() => {
       const mySnowball = new Snowball();
       this.snowballsArr.push(mySnowball);
@@ -24,8 +25,8 @@ class Mygame {
     }, 16);
 
     setInterval(() => {
-      const fireball = new Fireball();
-      this.fireballsArr.push(fireball);
+      const myFireball = new Fireball();
+      this.fireballsArr.push(myFireball);
     }, 3000);
 
     setInterval(() => {
@@ -45,7 +46,18 @@ class Mygame {
         this.player.moveRight();
       }
     });
-  }
+
+// Event listener for the Timer 
+    window.addEventListener('load', () => {
+        const timerElm = document.getElementById('timer');
+        const timer = new Timer(timerElm);
+        timer.start();
+      
+        setTimeout(() => {
+          timer.stop();
+        }, 1000 * 1000);
+      });
+  };
 
   removeFromGame(fireballInstance) {
     if (fireballInstance.positionY > 100) {
@@ -61,7 +73,7 @@ class Mygame {
       this.player.positionY < snow.positionX + snow.height &&
       this.player.height + this.player.positionY > snow.positionY
     ) {
-      //window.location.href = "./game-over-page.html"
+      window.location.href = "./game-over-page.html"
     }
   }
 
@@ -134,45 +146,112 @@ class Snowball {
 
   moveDown() {
     this.positionY--;
-    console.log(this.positionY);
-    this.snowballElm.style.border = "3px solid red";
     this.snowballElm.style.bottom = this.positionY + "vh";
   }
 }
 
 class Fireball {
-  constructor() {
-    this.height = 27;
-    this.width = 7;
-    this.positionX = 0; //Math.floor(Math.random() * 100 + 1);
-    this.positionY = Math.floor(Math.random() * 100 + 1);
-    this.fireballElm = null;
-    this.createDomElmFireball();
+    constructor() {
+      this.height = 25;
+      this.width = 5;
+      this.positionX = Math.floor(Math.random() * 70 + 1);
+      this.positionY = 0;
+      this.fireballElm = null;
+      this.createDomElmFireball();
+    }
+  
+    createDomElmFireball() {
+      this.fireballElm = document.createElement("div");
+  
+      this.fireballElm.className = "fireball";
+      this.fireballElm.style.left = this.positionX + "vw";
+  
+      this.fireballElm.style.height = this.height + "vh"; 
+      this.fireballElm.style.width = this.width + "vw";
+  
+      const boardElm = document.getElementById("board");
+      boardElm.appendChild(this.fireballElm);
+  
+    }
+  
+    moveUp() {
+      this.positionY++;
+      this.fireballElm.style.bottom = this.positionY + "vh";
+    }
   }
 
-  createDomElmFireball() {
-    this.fireballElm = document.createElement("div");
 
-    this.fireballElm.className = "fireball";
-    this.fireballElm.style.left = this.positionY + "vw"; //here vh could be?
+  class Timer {
+    constructor(timerElm) {
+      this.timerElm = timerElm;
+      this.seconds = 0;
+      this.minutes = 0;
+      this.interval = null;
+      this.timeCountsArr = [];// maybe delete if cant get it to the other page
+    }
+  
+    start() {
+      this.interval = setInterval(() => {
+        this.seconds++;
+        if (this.seconds === 60) {
+          this.seconds = 0;
+          this.minutes++;
+        }
+        this.timeCount();
+        this.timeCountsArr.push(this.timeCount);//maybe delete if cant get it to the other page;
+        console.log(timeCountsArr)// maybe delete if cant get it to the other page;
+      }, 1000);
+    }
+  
+    stop() {
+      clearInterval(this.interval);
+    }
+  
+    reset() {
+      this.seconds = 0;
+      this.minutes = 0;
+      this.timeCount();
+    }
+  
+    timeCount() {
+      const minutesStr = this.minutes < 10 ? `0${this.minutes}` : `${this.minutes}`;
+      const secondsStr = this.seconds < 10 ? `0${this.seconds}` : `${this.seconds}`;
+      this.timerElm.textContent = `${minutesStr}:${secondsStr}`;
+     }
+  };
 
-    this.fireballElm.style.height = this.height + "vh";
-    this.fireballElm.style.width = this.width + "vw";
+// class Fireball {
+//   constructor() {
+//     this.height = 27;
+//     this.width = 7;
+//     this.positionX = 0; //Math.floor(Math.random() * 100 + 1);
+//     this.positionY = Math.floor(Math.random() * 100 + 1);
+//     this.fireballElm = null;
+//     this.createDomElmFireball();
+//   }
 
-    const boardElm = document.getElementById("board");
-    boardElm.appendChild(this.fireballElm);
-  }
+//   createDomElmFireball() {
+//     this.fireballElm = document.createElement("div");
 
-  moveUp() {
-    this.positionY++;
-    this.fireballElm.style.border = "3px solid green";
-    this.fireballElm.style.bottom = this.positionY + "vh";
-  }
-}
+//     this.fireballElm.className = "fireball";
+//     this.fireballElm.style.left = this.positionY + "vw"; //here vh could be?
+
+//     this.fireballElm.style.height = this.height + "vh";
+//     this.fireballElm.style.width = this.width + "vw";
+
+//     const boardElm = document.getElementById("board");
+//     boardElm.appendChild(this.fireballElm);
+//   }
+
+//   moveUp() {
+//     this.positionY++;
+//     //this.fireballElm.style.border = "3px solid green";
+//    this.fireballElm.style.bottom = this.positionY + "vh";
+//   }
+// }
 
 const game = new Mygame();
 game.start();
-
 
 
 
