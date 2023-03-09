@@ -6,30 +6,33 @@ body {
 #board {
     height: 100vh;
     position: relative;
-    /* background-image: url(./png-transparent-snowflake-winter-blue-christmas-tree-blue-tree-branch-branch-thumbnail.png);  */
-    /* background-color: rgb(2, 40, 2);  */
-    background-color: black;
-
+    /* background-image: url(./newbc1.jpg); */
+    background-image: url(./newbc7.png);
+    
+    
 
 }
 
 #player {
     background-image: url(./pl9.webp);
+    
     background-size: 100% 100%;
     position: absolute;
     bottom: 10vh;
 }
 
+
+/* refers to the snowflakes; */
 .snowball {
-    /* background-image: url(./png-transparent-blue-and-white-snowflake-illustration-elsa-the-snow-queen-snowflake-snowflakes-photography-symmetry-snowflakes-thumbnail.png); */
+
     position: absolute;
     background-image: url(./✿◠‿◠-98840-—-b855d-snowflake-38422-request.gif);
     background-size: 100% 100%;
 }
 
-
+/* refers to the white snowball passing by; */
 .fireball {
-    /* background-image: url(./images\ \(3\).png);   */
+
     background-image: url(./snowball\ 2.png);
     background-size: 100% 100%;
     position: absolute;
@@ -47,14 +50,14 @@ h1 {
 
 
 #game-over-body {
-    background-color: black;
+    background-image: url(./newbc7.png);
 }
 
 #tryAgain-button {
     position: absolute;
-    background-color: black;
+    background-color: rgb(132, 6, 48);
     padding: 4vh;
-    margin-left: 45vw;
+    margin-left: 60vw;
     border-radius: 30%;
     font-weight: bolder;
     border-radius: 20%;
@@ -66,7 +69,9 @@ a {
 }
 
 #intro-body {
-    background-color: rgb(222, 172, 96);
+    /* background-color: rgb(222, 172, 96); */
+    /* background-image: url( ./newbc9.jpg); */
+    background-image: url(./newbc7.png);
 }
 
 #start-button {
@@ -79,29 +84,28 @@ a {
 }
 
 p {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     color: rgb(132, 6, 48);
-    padding: 9vh;
+    padding: 1vh; 
     font-weight: bolder;
     font-size: xx-large;
-
+   text-shadow: 0cap;
 }
 
 h3 {
     border-radius: 25%;
     margin-left: 1vw;
     position: absolute;
-    background-color: rgb(187, 10, 10);
+    background-color: rgb(132, 6, 48);
     padding: 1vw;
     color: cornsilk;
 }
 
 input {
     background-color: rgb(216, 163, 98);
-    color: rgb(90, 13, 161);
-
+    color: rgb(187, 10, 10);
     margin-left: 0vw;
-    padding: 1vw;
+    padding: 2vw;
     border: 0cm;
     text-align: center;
     font-size: larger;
@@ -110,12 +114,44 @@ input {
 
 label {
     background-color: rgb(216, 163, 98);
-    color: rgb(129, 47, 206);
-
+    color: rgb(171, 14, 14);
     margin-left: 10vw;
-    padding: 1vw;
+    padding: 2vw;
     border: 0cm;
     font-size: larger;
     font-weight: bolder;
 
+}
+
+#sec {
+    background-color: rgb(216, 163, 98);
+    color: rgb(171, 14, 14);
+    margin: 0px;
+    padding: 2vw;
+    /* border: 0cm; */
+    font-size: larger;
+    font-weight: bolder;
+}
+
+#intro-snowflake {
+
+    /* background-image: url(./✿◠‿◠-98840-—-b855d-snowflake-38422-request.gif); */
+    position: absolute;
+    background-size: 100%;
+    margin-left: 70%;
+
+}
+
+/* refers to the shield of the bee; */
+.bullet {
+    background-color: rgb(178, 178, 8);
+    position: absolute;
+    border-radius: 30%;
+
+}
+
+li {
+    color: rgb(132, 6, 48);
+    font-size: larger;
+    margin-left: 10vw;
 }

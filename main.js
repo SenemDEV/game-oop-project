@@ -1,46 +1,64 @@
 class Mygame {
   constructor() {
-    this.player = null;
-    this.snowballsArr = [];
-    this.fireballsArr = [];
+    this.player = null; 
+    this.snowballsArr = []; // refers to the snowflakes;
+    this.fireballsArr = []; // refers to the white snowball;
+    this.bulletsArr = []; // refers to the shield;
   }
 
   start() {
     this.player = new Player();
     this.attachEventListeners();
 
+    //Setinterval for the snowflakes
     setInterval(() => {
       const mySnowball = new Snowball();
       this.snowballsArr.push(mySnowball);
-    }, 1200); //600
+    }, 1000);
 
+    setInterval(() => {
+      this.bulletsArr.forEach((bulletInstance) => {
+        bulletInstance.bulletMove();
+        this.detectBulletCollision(bulletInstance);
+      });
+    }, 16);
+
+    // SetInterval refers to snowflakes;
     setInterval(() => {
       this.snowballsArr.forEach((snow) => {
         snow.moveDown();
         this.detectCollision(snow);
-        this.removeFromGame(snow);
+        this.removeFromGame(snow); // Removes the snowflakes from the DOM (snowElm);
       });
-    }, 46); //16
+    }, 60);
 
+    // SetInterval refers to the white snowballs  (Fireball > actually the white snowball)
     setInterval(() => {
       const myFireball = new Fireball();
       this.fireballsArr.push(myFireball);
     }, 3000);
-
+    // SetInterval refers to the white snowballs  (Fireball > actually the white snowball)
     setInterval(() => {
       this.fireballsArr.forEach((fireballInstance) => {
         fireballInstance.moveUp();
         this.removeFromGame(fireballInstance);
       });
-    }, 16);
+    }, 26);
   }
 
   attachEventListeners() {
+    //Event listener for the key detection
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
         this.player.moveLeft();
       } else if (e.key === "ArrowRight") {
         this.player.moveRight();
+      } else if (e.keyCode === 32) {
+        const myBullet = new Bullet(
+          this.player.positionX,
+          this.player.positionY
+        );
+        this.bulletsArr.push(myBullet);
       }
     });
 
@@ -56,32 +74,42 @@ class Mygame {
     });
   }
 
-  removeFromGame(fireballInstance) {
-    if (fireballInstance.positionY > 100) {
-      fireballInstance.fireballElm.remove();
-      this.fireballsArr.shift();
-    }
-  }
-
+  //Snow (snowElm) refers to the snowflakes in the game;
   detectCollision(snow) {
     if (
       this.player.positionX < snow.positionX + snow.width &&
       this.player.positionX + this.player.width > snow.positionX &&
-      this.player.positionY < snow.positionX + snow.height &&
+      this.player.positionY < snow.positionY + snow.height &&
       this.player.height + this.player.positionY > snow.positionY
     ) {
       window.location.href = "./game-over-page.html";
     }
   }
 
+  // snow (snowElm) refers to the snowflakes in the game
   removeFromGame(snow) {
-    if (snow.positionY < -16) {
+    if (snow.positionY < -10) {
       snow.snowballElm.remove();
       this.snowballsArr.shift();
     }
   }
-}
 
+  // refers to the collision between the shield and the snowflakes;
+  detectBulletCollision(bulletInstance) {
+    this.snowballsArr.forEach((snow, index) => {
+      if (
+        bulletInstance.positionY > snow.positionY &&
+        bulletInstance.positionY < snow.positionY + snow.height &&
+        bulletInstance.positionX + bulletInstance.width > snow.positionX &&
+        bulletInstance.positionX < snow.positionX + snow.width
+      ) {
+        snow.snowballElm.remove();
+        bulletInstance.bulletElm.remove();
+        this.snowballsArr.splice(index, 1);
+      }
+    });
+  }
+}
 class Player {
   constructor() {
     this.positionX = 0;
@@ -110,7 +138,7 @@ class Player {
 class Snowball {
   constructor() {
     this.height = 20; //Math.floor(Math.random() * 30 + 1); //was 10;
-    this.width = Math.floor(Math.random() * Math.random() + 5); //was 20;
+    this.width = 7; //Math.floor(Math.random() * Math.random() + 5); //was 20;
     this.positionX = Math.floor(Math.random() * 70 + 1);
     this.positionY = 100;
     this.snowballElm = null;
@@ -125,7 +153,7 @@ class Snowball {
     this.snowballElm.className = "snowball";
     this.snowballElm.style.left = this.positionX + "vw";
 
-    this.snowballElm.style.height = this.height + "vh"; //was originally h  //maybe should be w instead for better
+    this.snowballElm.style.height = this.height + "vh";
     this.snowballElm.style.width = this.width + "vw";
 
     const boardElm = document.getElementById("board");
@@ -141,11 +169,12 @@ class Snowball {
   }
 
   moveDown() {
-    this.positionY--;
+    this.positionY -= 2;
     this.snowballElm.style.bottom = this.positionY + "vh";
   }
 }
 
+// the Fireball name refers to the White big snowball passing by;
 class Fireball {
   constructor() {
     this.height = 30;
@@ -167,6 +196,10 @@ class Fireball {
 
     const boardElm = document.getElementById("board");
     boardElm.appendChild(this.fireballElm);
+
+    setTimeout(() => {
+      this.fireballElm.remove();
+    }, 5000);
   }
 
   moveUp() {
@@ -215,35 +248,39 @@ class Timer {
   }
 }
 
-// class Fireball {
-//   constructor() {
-//     this.height = 27;
-//     this.width = 7;
-//     this.positionX = 0; //Math.floor(Math.random() * 100 + 1);
-//     this.positionY = Math.floor(Math.random() * 100 + 1);
-//     this.fireballElm = null;
-//     this.createDomElmFireball();
-//   }
+// Refers to the shield element which protects the player;
+class Bullet {
+  constructor(positionX, positionY) {
+    Bullet;
+    this.width = 10;
+    this.height = 1;
+    this.positionX = positionX;
+    this.positionY = positionY;
+    this.bulletElm = null;
+    this.createBulletElement();
+  }
+  createBulletElement() {
+    this.bulletElm = document.createElement("div");
+    this.bulletElm.className = "bullet";
+    this.bulletElm.style.width = this.width + "vw";
+    this.bulletElm.style.height = this.height + "vh";
+    this.bulletElm.style.bottom = this.positionY + "vh";
+    this.bulletElm.style.left = this.positionX + "vw";
 
-//   createDomElmFireball() {
-//     this.fireballElm = document.createElement("div");
+    const boardElm = document.getElementById("board");
+    boardElm.appendChild(this.bulletElm);
 
-//     this.fireballElm.className = "fireball";
-//     this.fireballElm.style.left = this.positionY + "vw"; //here vh could be?
+    // to remove bulletElm from the DOM;
+    setTimeout(() => {
+      this.bulletElm.remove();
+    }, 9000);
+  }
 
-//     this.fireballElm.style.height = this.height + "vh";
-//     this.fireballElm.style.width = this.width + "vw";
-
-//     const boardElm = document.getElementById("board");
-//     boardElm.appendChild(this.fireballElm);
-//   }
-
-//   moveUp() {
-//     this.positionY++;
-//     //this.fireballElm.style.border = "3px solid green";
-//    this.fireballElm.style.bottom = this.positionY + "vh";
-//   }
-// }
+  bulletMove() {
+    this.positionY++;
+    this.bulletElm.style.bottom = this.positionY + "vh";
+  }
+}
 
 const game = new Mygame();
 game.start();
