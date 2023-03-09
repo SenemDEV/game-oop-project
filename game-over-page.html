@@ -14,9 +14,21 @@
 </head>
 
 <body id="game-over-body">
-    <h1>Hey it's worth TRYING AGAIN!</h1>
+    <h1>Can you keep the Happy-Bee alive even longer?</h1>
     <!-- <button id="tryAgain-button"><a href="./index.html">Try Again</a></button> -->
     <button id="tryAgain-button"><a href="./intro-page.html">Try Again</a></button>
+
+
+    <label for="Timer">You SCORED: </label>
+    <input type="text" id="Timer" name="Timer" value="">
+    <script>
+        // Retrieve the value from local storage
+        var Timer = localStorage.getItem("timer");
+
+        // Display the value in the text field
+        document.getElementById("Timer").value = Timer;
+    </script>
+
 
 </body>
 

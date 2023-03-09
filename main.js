@@ -1,20 +1,18 @@
-
 class Mygame {
-  constructor(timer) { //timer deleet it if not working
+  constructor() {
     this.player = null;
     this.snowballsArr = [];
     this.fireballsArr = [];
-    this.timer = timer;//deleete if not working
   }
 
   start() {
     this.player = new Player();
     this.attachEventListeners();
-    
+
     setInterval(() => {
       const mySnowball = new Snowball();
       this.snowballsArr.push(mySnowball);
-    }, 600);
+    }, 1200); //600
 
     setInterval(() => {
       this.snowballsArr.forEach((snow) => {
@@ -22,7 +20,7 @@ class Mygame {
         this.detectCollision(snow);
         this.removeFromGame(snow);
       });
-    }, 16);
+    }, 46); //16
 
     setInterval(() => {
       const myFireball = new Fireball();
@@ -35,7 +33,6 @@ class Mygame {
         this.removeFromGame(fireballInstance);
       });
     }, 16);
-
   }
 
   attachEventListeners() {
@@ -47,17 +44,17 @@ class Mygame {
       }
     });
 
-// Event listener for the Timer 
-    window.addEventListener('load', () => {
-        const timerElm = document.getElementById('timer');
-        const timer = new Timer(timerElm);
-        timer.start();
-      
-        setTimeout(() => {
-          timer.stop();
-        }, 1000 * 1000);
-      });
-  };
+    // Event listener for the Timer
+    window.addEventListener("load", () => {
+      const timerElm = document.getElementById("timer");
+      const timer = new Timer(timerElm);
+      timer.start();
+
+      setTimeout(() => {
+        timer.stop();
+      }, 1000 * 1000);
+    });
+  }
 
   removeFromGame(fireballInstance) {
     if (fireballInstance.positionY > 100) {
@@ -73,7 +70,7 @@ class Mygame {
       this.player.positionY < snow.positionX + snow.height &&
       this.player.height + this.player.positionY > snow.positionY
     ) {
-      window.location.href = "./game-over-page.html"
+      window.location.href = "./game-over-page.html";
     }
   }
 
@@ -96,7 +93,6 @@ class Player {
     this.playerElm.style.width = this.width + "vw";
   }
   moveLeft() {
-    // player still can move out of the screen
     if (this.positionX) {
       this.positionX -= 2;
       this.playerElm.style.left = this.positionX + "vw";
@@ -104,7 +100,7 @@ class Player {
   }
 
   moveRight() {
-    if (this.positionX >= 0) {
+    if (this.positionX < 90) {
       this.positionX += 2;
       this.playerElm.style.left = this.positionX + "vw";
     }
@@ -113,8 +109,8 @@ class Player {
 
 class Snowball {
   constructor() {
-    this.height = Math.floor(Math.random() * 30 + 1); //was 10;
-    this.width = Math.floor(Math.random() * Math.random() + 1); //was 20;
+    this.height = 20; //Math.floor(Math.random() * 30 + 1); //was 10;
+    this.width = Math.floor(Math.random() * Math.random() + 5); //was 20;
     this.positionX = Math.floor(Math.random() * 70 + 1);
     this.positionY = 100;
     this.snowballElm = null;
@@ -151,74 +147,73 @@ class Snowball {
 }
 
 class Fireball {
-    constructor() {
-      this.height = 25;
-      this.width = 5;
-      this.positionX = Math.floor(Math.random() * 70 + 1);
-      this.positionY = 0;
-      this.fireballElm = null;
-      this.createDomElmFireball();
-    }
-  
-    createDomElmFireball() {
-      this.fireballElm = document.createElement("div");
-  
-      this.fireballElm.className = "fireball";
-      this.fireballElm.style.left = this.positionX + "vw";
-  
-      this.fireballElm.style.height = this.height + "vh"; 
-      this.fireballElm.style.width = this.width + "vw";
-  
-      const boardElm = document.getElementById("board");
-      boardElm.appendChild(this.fireballElm);
-  
-    }
-  
-    moveUp() {
-      this.positionY++;
-      this.fireballElm.style.bottom = this.positionY + "vh";
-    }
+  constructor() {
+    this.height = 30;
+    this.width = 10;
+    this.positionX = Math.floor(Math.random() * 70 + 1);
+    this.positionY = 0;
+    this.fireballElm = null;
+    this.createDomElmFireball();
   }
 
+  createDomElmFireball() {
+    this.fireballElm = document.createElement("div");
 
-  class Timer {
-    constructor(timerElm) {
-      this.timerElm = timerElm;
-      this.seconds = 0;
-      this.minutes = 0;
-      this.interval = null;
-      this.timeCountsArr = [];// maybe delete if cant get it to the other page
-    }
-  
-    start() {
-      this.interval = setInterval(() => {
-        this.seconds++;
-        if (this.seconds === 60) {
-          this.seconds = 0;
-          this.minutes++;
-        }
-        this.timeCount();
-        this.timeCountsArr.push(this.timeCount);//maybe delete if cant get it to the other page;
-        console.log(timeCountsArr)// maybe delete if cant get it to the other page;
-      }, 1000);
-    }
-  
-    stop() {
-      clearInterval(this.interval);
-    }
-  
-    reset() {
-      this.seconds = 0;
-      this.minutes = 0;
+    this.fireballElm.className = "fireball";
+    this.fireballElm.style.left = this.positionX + "vw";
+
+    this.fireballElm.style.height = this.height + "vh";
+    this.fireballElm.style.width = this.width + "vw";
+
+    const boardElm = document.getElementById("board");
+    boardElm.appendChild(this.fireballElm);
+  }
+
+  moveUp() {
+    this.positionY++;
+    this.fireballElm.style.bottom = this.positionY + "vh";
+  }
+}
+
+class Timer {
+  constructor(timerElm) {
+    this.timerElm = timerElm;
+    this.seconds = 0;
+    this.minutes = 0;
+    this.interval = null;
+  }
+
+  start() {
+    this.interval = setInterval(() => {
+      this.seconds++;
+      if (this.seconds === 60) {
+        this.seconds = 0;
+        this.minutes++;
+      }
       this.timeCount();
-    }
-  
-    timeCount() {
-      const minutesStr = this.minutes < 10 ? `0${this.minutes}` : `${this.minutes}`;
-      const secondsStr = this.seconds < 10 ? `0${this.seconds}` : `${this.seconds}`;
-      this.timerElm.textContent = `${minutesStr}:${secondsStr}`;
-     }
-  };
+    }, 1000);
+  }
+
+  stop() {
+    clearInterval(this.interval);
+  }
+
+  reset() {
+    this.seconds = 0;
+    this.minutes = 0;
+    this.timeCount();
+    localStorage.clear();
+  }
+
+  timeCount() {
+    const minutesStr =
+      this.minutes < 10 ? `0${this.minutes}` : `${this.minutes}`;
+    const secondsStr =
+      this.seconds < 10 ? `0${this.seconds}` : `${this.seconds}`;
+    this.timerElm.textContent = `${minutesStr}:${secondsStr}`;
+    localStorage.timer = this.timerElm.textContent;
+  }
+}
 
 // class Fireball {
 //   constructor() {
@@ -252,10 +247,3 @@ class Fireball {
 
 const game = new Mygame();
 game.start();
-
-
-
-
-
-
-

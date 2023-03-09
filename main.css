@@ -6,51 +6,117 @@ body {
 #board {
     height: 100vh;
     position: relative;
+    /* background-image: url(./png-transparent-snowflake-winter-blue-christmas-tree-blue-tree-branch-branch-thumbnail.png);  */
+    /* background-color: rgb(2, 40, 2);  */
     background-color: black;
- 
+
+
 }
 
- #player {
-    background-color: palevioletred;
+#player {
+    background-image: url(./pl9.webp);
+    background-color: antiquewhite;
+    background-size: 100% 100%;
     position: absolute;
-    bottom: 10vh; 
-    border-radius: 30%;
-
+    bottom: 10vh;
 }
- 
+
 .snowball {
-    background-color: red;
+    /* background-image: url(./png-transparent-blue-and-white-snowflake-illustration-elsa-the-snow-queen-snowflake-snowflakes-photography-symmetry-snowflakes-thumbnail.png); */
     position: absolute;
-    border-radius: 40%;
+    background-image: url(./✿◠‿◠-98840-—-b855d-snowflake-38422-request.gif);
+    background-size: 100% 100%;
 }
 
 
- .fireball {
-    background-color: greenyellow;
+.fireball {
+    /* background-image: url(./images\ \(3\).png);   */
+    background-image: url(./snowball\ 2.png);
+    background-size: 100% 100%;
     position: absolute;
-    border-radius: 20%;
-} 
+
+}
 
 
 h1 {
-    background-color: red;
-    border-radius: 10%;
-    color: cornsilk;
-    padding: 15vh;
+    padding-left: 10vw;
+    color: burlywood;
+    margin: 5%;
+    font-size: xx-large;
+    font-weight: bolder;
 }
 
 
-#game-over-body{
-    background-color: cornsilk;
+#game-over-body {
+    background-color: black;
 }
+
 #tryAgain-button {
     position: absolute;
-    background-color: green;
-    padding: 3vh;
-    margin-left: 20vw;
+    background-color: black;
+    padding: 4vh;
+    margin-left: 45vw;
     border-radius: 30%;
+    font-weight: bolder;
+    border-radius: 20%;
+    border: 1px solid rgb(222, 172, 96);
 }
 
 a {
     color: cornsilk;
+}
+
+#intro-body {
+    background-color: rgb(222, 172, 96);
+}
+
+#start-button {
+    position: absolute;
+    background-color: rgb(132, 6, 48);
+    ;
+    padding: 5vh;
+    border-radius: 10%;
+    margin-left: 30vh;
+}
+
+p {
+    background-color: antiquewhite;
+    color: rgb(132, 6, 48);
+    padding: 9vh;
+    font-weight: bolder;
+    font-size: xx-large;
+
+}
+
+h3 {
+    border-radius: 25%;
+    margin-left: 1vw;
+    position: absolute;
+    background-color: rgb(187, 10, 10);
+    padding: 1vw;
+    color: cornsilk;
+}
+
+input {
+    background-color: rgb(216, 163, 98);
+    color: rgb(90, 13, 161);
+
+    margin-left: 0vw;
+    padding: 1vw;
+    border: 0cm;
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+label {
+    background-color: rgb(216, 163, 98);
+    color: rgb(129, 47, 206);
+
+    margin-left: 10vw;
+    padding: 1vw;
+    border: 0cm;
+    font-size: larger;
+    font-weight: bolder;
+
 }
