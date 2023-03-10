@@ -13,6 +13,5 @@ HOW TO PLAY
 You can use the Left and Right Arrow keys to navigate the Happy-Bee's movements. If you press the space bar you can activate an extra property, a shield of the Happy-Bee which will eliminate the falling Snowflakes from bottom to top in a line.
 
 
-DEMO
 
 # Demo[https://senemdev.github.io/game-oop-project/intro-page.html]
