@@ -1,6 +1,6 @@
 class Mygame {
   constructor() {
-    this.player = null; 
+    this.player = null;
     this.snowballsArr = []; // refers to the snowflakes;
     this.fireballsArr = []; // refers to the white snowball;
     this.bulletsArr = []; // refers to the shield;
@@ -10,7 +10,7 @@ class Mygame {
     this.player = new Player();
     this.attachEventListeners();
 
-    //Setinterval for the snowflakes
+    //Setinterval refers to the snowflakes
     setInterval(() => {
       const mySnowball = new Snowball();
       this.snowballsArr.push(mySnowball);
@@ -74,7 +74,7 @@ class Mygame {
     });
   }
 
-  //Snow (snowElm) refers to the snowflakes in the game;
+  //Snow (snowElement) refers to the snowflakes in the game;
   detectCollision(snow) {
     if (
       this.player.positionX < snow.positionX + snow.width &&
@@ -86,7 +86,7 @@ class Mygame {
     }
   }
 
-  // snow (snowElm) refers to the snowflakes in the game
+  // snow (snowElement) refers to the snowflakes in the game
   removeFromGame(snow) {
     if (snow.positionY < -10) {
       snow.snowballElm.remove();
@@ -137,14 +137,12 @@ class Player {
 
 class Snowball {
   constructor() {
-    this.height = 20; //Math.floor(Math.random() * 30 + 1); //was 10;
-    this.width = 7; //Math.floor(Math.random() * Math.random() + 5); //was 20;
+    this.height = 20; //Math.floor(Math.random() * 30 + 1); 
+    this.width = 7; //Math.floor(Math.random() * Math.random() + 5); 
     this.positionX = Math.floor(Math.random() * 70 + 1);
     this.positionY = 100;
     this.snowballElm = null;
     this.createDomElmSnowball();
-
-    //  this.myNewImgElm =null;
   }
 
   createDomElmSnowball() {
@@ -158,14 +156,6 @@ class Snowball {
 
     const boardElm = document.getElementById("board");
     boardElm.appendChild(this.snowballElm);
-
-    //     //Create a DOM element with img
-    //     this.myNewImgElm = document.createElement('img');
-
-    //     this.myNewImgElm.className = "snowball";
-    //     myNewImgElm.setAttribute("src", "./snowball 3.jpg");
-    //     const boardElm = document.getElementById("board");
-    //     boardElm.appendChild(this.myNewImgElm);
   }
 
   moveDown() {
